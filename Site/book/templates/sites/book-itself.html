@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block name %}
+{{ book.name }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row book-itself-main">
+        <div class="col-3 book-itself-left offset-lg-3">
+            <div class="book-itself-img img-fluid"><img src="{{ book.image.url }}" alt=""></div>
+        </div>
+        <div class="col-6 book-itself-right">
+            <ul>
+                <li><span>Название книги: {{ book.name }} </span></li>
+                <li><span>Категория:
+                        {% for category in book.category.all %}
+                        йй {{ category.name }}
+                        {% endfor %}</span></li>
+                <li><span>Год выпуска: {{ book.year }}</span></li>
+                <li><span>Автор: {% for author in book.author.all %}
+                        <a href="{% url 'books:author_itself' author.name %}">{{ author.name }}</a>
+                        {% endfor %}
+                    </span></li>
+                <li><span>Издательство: {% for izdan in book.izdan.all %}
+                        {{ izdan.name }}
+                        {% endfor %}</span></li>
+                <li><span>Количество страниц: {{ book.pages }}</span></li>
+                <li><span>Переплет: {{ book.cover }}</span></li>
+                <li><span>ISBN: {{ book.isbn }}</span></li>
+                <li><span>Цена: {{ book.price }} рублей</span></li>
+                <li> <div>
+                    <form action="{% url 'cart:cart_add' book.id %}" method="post">
+                        {{ cart_book_form }}
+                        {% csrf_token %}
+                        <button type="submit" class="korzina" value="Add to cart">В корзину</button>
+                    </form>
+                </div></li>
+                
+            </ul>
+        </div>
+        
+        <div class="col-6 offset-lg-3">
+            <h3>Comment</h3>
+            <form action="{% url 'books:add_review' book.id %}" class="mt-m4" method="POST" id="formReview">
+                {% csrf_token %}
+                <input type="hidden" name="parent" id="contactparent" value="">
+                <textarea name="text" id="book-itself-textarea" class="book-itself-textarea">
+                </textarea>
+                    <div class="form-group">
+                        <label for="book-itself-name">
+                            Имя
+                        </label>
+                        <input type="text" id="name" name='name' class="form-control" value="{{ user.username }}" readonly>
+                    </div>
+                    <div class="book-itself-form-group">
+                        <label for="book-itself-email">
+                            Email
+                        </label>
+                        <input type="email" id="email" name="email" class="form-control" value="{{ user.email }}" readonly>
+                    </div>
+                <div class="book-itself-buttons">
+                    <button class="btn btn-outline-success" type="reset">Очистить</button>
+                    <button class="btn btn-outline-success" type="submit">Отправить</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-6 offset-lg-3">
+            <span> {{ book.reviews_set.count }} комментариев</span>
+            <h3>Comments</h3>
+            {% for review in book.reviews_set.all %}
+            <div class="book-itself-separate-comments text-break">
+                <h6>{{ review.name }}</h6>
+                <p> {{ review.text }} </p>
+                <a href="#formReview" onclick="addReview(`{{ review.name }}`, `{{ review.id }}`)">Ответить</a>
+                {% for rew in review.reviews_set.all %}
+                <div class="mt-5 book-itself-inner-comment text-break">
+                    <h6 class="mt-0">{{ rew.name }}</h6>
+                    <p class="mt-2"> {{ rew.text }} </p>
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<script>
+    function addReview(name, id){
+        document.getElementById('contactparent').value = id;
+        document.getElementById('book-itself-textarea').innerText = `${name}, `;
+    }
+</script>
+{% endblock %}

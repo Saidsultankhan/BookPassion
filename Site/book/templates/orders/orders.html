@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Thank you{% endblock %}
+
+{% block content %}
+<main class="container">
+    <div class="row justify-content-center">
+        <div class="col-8 order-created">
+            <h1>Благодрим вас за покупку!</h1>
+            <p>Ваш заказ был принят и в настоящий момент находится в обработке. Номер вашего заказа
+                <strong>{{ order.id }}</strong>.
+            </p>
+        </div>
+    </div>
+</main>
+{% endblock %}

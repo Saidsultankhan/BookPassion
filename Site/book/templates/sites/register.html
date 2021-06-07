@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <main class="container">
+        <div class="row justify-content-center">
+            <div class="col-8 register-main">
+                <p class="register-register">Регистрация</p>
+                <form action="results.html" method="POST" autocomplete="on">
+                    <div>
+                        <label for="nik">Ник</label>
+                        <input class="form-control" type="text" name="Ник" id="nik" required>
+                    </div>
+                    <div>
+                        <label for="name">Имя</label>
+                        <input class="form-control" type="text" name="Имя" id="name" required>
+                    </div>
+                    <div>
+                        <label for="surname">Фамилия</label>
+                        <input class="form-control" type="text" name="Фамилия" id="surname">
+                    </div>
+                    <div>
+                        <label for="email">Почта</label>
+                        <input class="form-control" type="email" name="Почта" id="email" required>
+                    </div>
+                    <div id="password">
+                        <label for="password">Пароль</label>
+                        <input class="form-control" type="password" name="Пароль" id="password" required>
+                    </div>
+                    <button class="btn btn-primary" type="reset">Очистить</button>
+                    <button class="btn btn-primary" type="submit">Зарегистрироваться</button>
+                </form>
+            </div>
+        </div>
+    </main>
+{% emdblock %}

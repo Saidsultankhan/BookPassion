@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <main class="container">
+        <div class="row basket-main">
+            <div class="col-12 d-flex justify-content-center" style="margin-bottom: 30px;"><h5>Ваша корзина</h5></div>
+            <div class="w-100 d-none d-md-block"></div>
+            <div class="col-2 basket-book-info"></div>
+            <div class="col-3 basket-book-info"><h6>Книга</h6></div>
+            <div class="col-3 basket-book-info"><h6>Количество</h6></div>
+            <div class="col-2 basket-book-info"><h6>Доп. действия</h6></div>
+            <div class="col-2 basket-book-info"><h6>Цена за 1 книгу</h6></div>
+            <hr>
+            {% for item in cart %}
+                {% with book=item.book %}
+            <div class="col-1 basket-book-info" >
+                <img class="img-fluid" src="{{ book.image.url }}" alt="" style="margin-bottom: 10px;">
+            </div>
+            <div class="col-3 basket-book-info">
+                <a href="{% url 'books:book_itself' book.slug %}"><p>{{ book.name }}</p></a>
+                <p style="margin-left: 20px;">{% for author in book.author.all %}
+                    <a href="{% url 'books:author_itself' author.name %}">{{ author.name }}</a>{% endfor %}
+                </p>
+            </div>
+            <div class="col-3 basket-book-info">
+                <input type="tel" name="" id="quantity" value="{{ item.quantity }}">
+            </div> 
+            <div class="col-2 basket-book-info">
+                <p><a href="{% url 'cart:cart_remove' book.id%}">Убрать</a></p>
+            </div>
+            <div class="col-2 basket-book-info">
+                <p>{{ item.price }} byn</p>
+            </div>
+            <hr>
+                {% endwith %}
+            {% endfor %}
+            <div class="basket-decision">
+                <div>
+                    <a href="{% url 'books:main_page' %}" class="button light">Продолжить покупку</a>
+                    <a href="{% url 'orders:order_create' %}" class="button">
+                        Оформить заказ
+                    </a>
+                </div>
+                <div>
+                    <p>{{ cart.get_total_price }} byn</p>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

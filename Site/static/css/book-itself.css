@@ -1,0 +1,96 @@
+body{
+    background-color: rgb(250, 250, 250);
+}
+
+nav{
+    border-bottom: 1px solid rgb(216, 216, 216);
+    background-color: white;
+}
+
+.log-in{
+    border-right: 1px solid rgb(216, 216, 216);
+}
+
+a, a:hover{
+    color: black;
+    text-decoration: none;
+}
+
+ul{
+    list-style-type: none;
+
+}
+
+.bro{
+    display: flex;
+}
+
+footer{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: rgb(255, 255, 255);
+    box-sizing: border-box;
+    border-top: 1px solid rgb(216, 216, 216);
+}
+
+.bro img{
+    width: 20px;
+    height: 20px;
+}
+
+.logo{
+    font-size: 20px;
+    color: black;
+    text-decoration: none;
+    text-align: center;
+}
+
+.logo:hover{
+    color: black;
+}
+
+.book-itself-main{
+    margin-top: 50px;
+    background-color: white;
+    border: 1px solid rgb(206, 205, 205);
+    border-radius: 5px;
+    margin-bottom: 50px;
+}
+
+ul{
+    list-style: none;
+}
+
+.book-itself-img{
+    width: 300px;
+    max-height: 400px;
+}
+
+.book-itself-img img{
+    width: 100%;
+    height: 100%;
+}
+
+.book-itself-right ul li{
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgb(216, 216, 216);
+}
+
+.book-itself-left, .book-itself-right{
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+textarea{
+    width: 100%;
+    height: 50px;
+    outline: none;
+}
+
+.book-itself-form{
+    padding-bottom: 50px;
+}
+
+div.col-6{
+    margin-top: 100px;
+} 

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+  <div class="container-fluid">
+    <div class="row pictures">
+      {% for book in book_list %}
+        <div class="books col-sm-5 col-md-3 col-lg-2 offset-md-1 offset-lg">
+          <div class="img">
+            <img src="{{ book.image.url }}" alt="">
+            <span style="font-size: 12px;">
+              <a href="#" >
+                {% for category in list_of_categories %}
+                  #{{ category.name }}
+                {% endfor %}
+              </a>
+            </span>
+          </div>
+          <a href="{{ book.get_absolute_url }}"><span style="font-size: 15px; font-weight: 500; margin-top: 5px;">{{ book.name }}</span></a>
+          <span style="font-size: 14px;"> {{ book.price }} рублей </span>
+          <div class="actions">
+            <div><button class="more_info"><a href="{{ book.get_absolute_url }}">Подробнее</a></button></div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+{% endblock %}

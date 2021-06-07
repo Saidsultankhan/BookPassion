@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block name %}
+{{ book.name }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row book-itself-main">
+        <div class="col-3 book-itself-left offset-lg-3">
+            <div class="book-itself-img img-fluid"><img src="{{ author.image.url }}" alt=""></div>
+        </div>
+        <div class="col-6 book-itself-right">
+            <ul>
+                <li><span>Имя писателя: {{ author.name }} </span></li>
+                <li><span>Категория:
+                        {% for category in book.category.all %}
+                            {{ category.name }}
+                        {% endfor %}</span></li>
+                <li><span>Год рождения: {{ author.year }}</span></li>
+                <li><span>Состояние: {{ author.worth }}$
+                    </span></li>
+                <li><span>Книги: 
+                    <ul>{% for book in author.book_author.all %}
+                            <li><a href="{% url 'books:book_itself' book.slug %}">{{ book.name }}</a></li>                
+                        {% endfor %}
+                    </ul>
+                    </span>
+                </li>
+                
+            </ul>
+        </div>
+        <div class="col-6 offset-lg-3">
+            <h3>Прокомментировать</h3>
+            
+        </div>
+        <div class="col-6 offset-lg-3">
+            <h3>О {{ author.name }}</h3>
+            {% for review in book.reviews_set.all %}
+            <div class="book-itself-separate-comments text-break">
+                <h6>{{ review.name }}</h6>
+                <p> {{ review.text }} </p>
+                <a href="#formReview" onclick="addReview(`{{ review.name }}`, `{{ review.id }}`)">Ответить</a>
+                {% for rew in review.reviews_set.all %}
+                <div class="mt-5 book-itself-inner-comment text-break">
+                    <h6 class="mt-0">{{ rew.name }}</h6>
+                    <p class="mt-2"> {{ rew.text }} </p>
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            <p style="border: 1px solid rgb(216, 216, 216); padding: 5px; border-radius: 5px;">
+                {{ author.description }}
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
